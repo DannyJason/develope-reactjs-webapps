@@ -1,7 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import './index.css';
-//import App from './App';
+import './index.css';
+import App from './App';
+
+//Render original
+/*ReactDOM.render(<App />, document.getElementById('root'));*/
+
+
+
 
 /********** Styles **********/
 /*var style = {
@@ -28,34 +34,20 @@ const title = React.createElement(
 );*/
 /****************************/
 
-let skiData = {
-    total: 50,
-    powder: 20,
-    backcountry: 10,
-    goal: 100
-}
+/*ReactDOM.render(
+    title,
+    document.getElementById('root')
+);*/
+/*ReactDOM.render(
+    <div style={style}>
+        <h1>Hello world!</h1>
+        <p>We're glad you're here.</p>
+    </div>,
+    document.getElementById('root')
+);*/
 
-class SkiDayCounter extends React.Component {
-    render() {
-        const {total, powder, backcountry, goal} = this.props
-        return (
-            <section>
-                <div>
-                    <p>Total Days: {total/*this.props.total*/}</p>
-                </div>
-                <div>
-                    <p>Powder Days: {powder/*this.props.powder*/}</p>
-                </div>
-                <div>
-                    <p>Backcountry Days: {backcountry/*this.props.backcountry*/}</p>
-                </div>
-                <div>
-                    <p>Goal: {goal/*this.props.goal*/}</p>
-                </div>
-            </section>
-        )
-    }
-}
+
+
 
 /*class Message extends React.Component {
     render() {
@@ -72,23 +64,55 @@ class SkiDayCounter extends React.Component {
     }
 }*/
 
-//Render original
-//ReactDOM.render(<App />, document.getElementById('root'));
-/*ReactDOM.render(
-    title,
-    document.getElementById('root')
-);*/
-/*ReactDOM.render(
-    <div style={style}>
-        <h1>Hello world!</h1>
-        <p>We're glad you're here.</p>
-    </div>,
-    document.getElementById('root')
-);*/
 /*ReactDOM.render(
     <Message msg="How are you?" color="blue" minutes={5}/>,
     document.getElementById('root')
 );*/
+
+
+
+
+/*let skiData = {
+    total: 50,
+    powder: 20,
+    backcountry: 10,
+    goal: 100
+}
+
+class SkiDayCounter extends React.Component {
+    //Custom Methods
+    getPercent = decimal => {
+        return decimal * 100 + '%'
+    }
+    calcGoalProgress = (total, goal) => {
+        return this.getPercent(total/goal)
+    }
+    ////////////////
+    render() {
+        const {total, powder, backcountry, goal} = this.props
+        return (
+            <section>
+                <div>
+                    <p>Total Days: {total}</p>
+                </div>
+                <div>
+                    <p>Powder Days: {powder}</p>
+                </div>
+                <div>
+                    <p>Backcountry Days: {backcountry}</p>
+                </div>
+                <div>
+                    <p>Goal: {this.calcGoalProgress(total, goal)}</p>
+                </div>
+            </section>
+        )
+    }
+}
+//this.props.total
+//this.props.powder
+//this.props.backcountry
+//this.props.goal
+
 ReactDOM.render(
     <SkiDayCounter
         total={skiData.total}
@@ -96,4 +120,39 @@ ReactDOM.render(
         backcountry={skiData.backcountry}
         goal={skiData.goal}/>,
     document.getElementById('root')
+);*/
+
+
+
+
+//Compose Components
+const Book = ({title, author, pages}) => {
+    return (
+        <section>
+            <h2>{title}</h2>
+            <p>By: {author}</p>
+            <p>Pages: {pages} pages</p>
+        </section>
+    )
+}
+const Library = () => {
+    return (
+        // <div>
+        //     Welcome to the Library!
+        // </div>
+        <div>
+            <Book title="The Sun Also Rises" author="Ernest Hemingway" pages={260}/>
+            <Book title="White Teeth" author="Zadie Smith" pages={480}/>
+            <Book title="Cat's Cradle" author="Kurt Vonnegut" pages={304}/>
+        </div>
+    )
+}
+ReactDOM.render(
+    // <div>
+    //     <Library />
+    //     <Library />
+    // </div>,
+    <Library />,
+    document.getElementById('root')
 );
+////////////////////
